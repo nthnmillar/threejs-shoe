@@ -14,6 +14,7 @@ function main() {
   var scale = 0.05;
   var lightMap = 'models/light-map.png';
   var normMap = 'models/normal-map.png';
+  var mouse3D;
 
   // LOADING MANAGER
   THREE.DefaultLoadingManager.onStart = function(url, itemsLoaded, itemsTotal) {
@@ -151,10 +152,11 @@ function main() {
   // RAYCAST
   function init() {
     canvas.addEventListener('mousedown', onDocumentMouseDown, false);
+    canvas.addEventListener('touchstart', onDocumentTouchDown, false);
 
     function onDocumentMouseDown(event) {
       console.log('Clicked');
-      var mouse3D = new THREE.Vector3(
+      mouse3D = new THREE.Vector3(
         (event.clientX / window.innerWidth) * 2 - 1,
         -(event.clientY / window.innerHeight) * 2 + 1,
         0.5
@@ -162,6 +164,23 @@ function main() {
       mouse3D.unproject(camera);
       mouse3D.sub(camera.position);
       mouse3D.normalize();
+      intersected(event);
+    }
+
+    function onDocumentTouchDown(event) {
+      console.log('Touched');
+       mouse3D = new THREE.Vector3(
+        (event.targetTouches[0].clientX / window.innerWidth) * 2 - 1,
+        -(event.targetTouches[0].clientY / window.innerHeight) * 2 + 1,
+        0.5
+      );
+      mouse3D.unproject(camera);
+      mouse3D.sub(camera.position);
+      mouse3D.normalize();
+      intersected(event);
+    }
+     
+    function intersected(event){
       var raycaster = new THREE.Raycaster(camera.position, mouse3D);
       var intersects = raycaster.intersectObjects(objects);
       // Change color if hit
@@ -177,7 +196,8 @@ function main() {
         console.log("setColor b",intersects[0].object.material.color.b);
         document.getElementById("colBlock").style.backgroundColor = "rgb(" + intersects[0].object.material.color.r * 255 + "," + intersects[0].object.material.color.g * 255 + "," + intersects[0].object.material.color.b * 255 + ")";
       }
-    }
+     }
+
 
     // RENDER
     function render() {
