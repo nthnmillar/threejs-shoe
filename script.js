@@ -1,8 +1,3 @@
-// ------------------------------------------------
-// BASIC SETUP
-// ------------------------------------------------
-
-// Create an empty scene
 var scene = new THREE.Scene();
 
 function main() {

@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/threejs-shoe/static/css/main.67d0c4e4.chunk.css",
+    "main.css": "/threejs-shoe/static/css/main.8e1d84c3.chunk.css",
     "main.js": "/threejs-shoe/static/js/main.f6fa8bcd.chunk.js",
     "main.js.map": "/threejs-shoe/static/js/main.f6fa8bcd.chunk.js.map",
     "runtime-main.js": "/threejs-shoe/static/js/runtime-main.c32d8384.js",
@@ -8,15 +8,15 @@
     "static/js/2.83f7d94c.chunk.js": "/threejs-shoe/static/js/2.83f7d94c.chunk.js",
     "static/js/2.83f7d94c.chunk.js.map": "/threejs-shoe/static/js/2.83f7d94c.chunk.js.map",
     "index.html": "/threejs-shoe/index.html",
-    "precache-manifest.5b5a0d164cb1a8f5c570962f9139b9ea.js": "/threejs-shoe/precache-manifest.5b5a0d164cb1a8f5c570962f9139b9ea.js",
+    "precache-manifest.bea6d1bd22a88eccf25f28edd4301413.js": "/threejs-shoe/precache-manifest.bea6d1bd22a88eccf25f28edd4301413.js",
     "service-worker.js": "/threejs-shoe/service-worker.js",
-    "static/css/main.67d0c4e4.chunk.css.map": "/threejs-shoe/static/css/main.67d0c4e4.chunk.css.map",
+    "static/css/main.8e1d84c3.chunk.css.map": "/threejs-shoe/static/css/main.8e1d84c3.chunk.css.map",
     "static/js/2.83f7d94c.chunk.js.LICENSE.txt": "/threejs-shoe/static/js/2.83f7d94c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c32d8384.js",
     "static/js/2.83f7d94c.chunk.js",
-    "static/css/main.67d0c4e4.chunk.css",
+    "static/css/main.8e1d84c3.chunk.css",
     "static/js/main.f6fa8bcd.chunk.js"
   ]
 }
