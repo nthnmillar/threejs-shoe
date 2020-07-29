@@ -19,10 +19,8 @@ function main() {
   var scale = 0.05;
   var lightMap = 'models/light-map.png';
   var normMap = 'models/normal-map.png';
-  //var manager = new THREE.LoadingManager();
 
   // LOADING MANAGER
-  //manager.onStart = function (url, itemsLoaded, itemsTotal) {
   THREE.DefaultLoadingManager.onStart = function(url, itemsLoaded, itemsTotal) {
     console.log(
       'Started loading file: ' +
@@ -54,12 +52,9 @@ function main() {
   camera.position.z = 4;
 
   // RENDERER
-  // var renderer = new THREE.WebGLRenderer({antialias:true});
-  // Configure renderer clear color
   renderer.setClearColor('#ffffff');
   // Configure renderer size
   renderer.setViewport(0, 0, canvas.clientWidth, canvas.clientHeight);
-  /* renderer.setSize(window.innerWidth, window.innerHeight); */
 
   // CONTROLS
   var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -97,7 +92,6 @@ function main() {
 
           model.traverse(function(o) {
             if (o.isMesh) {
-              //  o.material = new THREE.MeshPhongMaterial({color: 0x393939});
 
               if (
                 o.name == '001_laces' ||
@@ -117,7 +111,6 @@ function main() {
 
               if (o.name == '006_airbags') {
                 o.material = airMat;
-                //    o.material.blending = THREE.AdditiveBlending;
                 o.material.opacity = 0.8;
                 o.material.reflectivity = 3;
               }
@@ -125,7 +118,6 @@ function main() {
               o.material.lightMap = light;
               o.material.normalMap = norm;
 
-              // airMat
               if (o.name == '100_transparent') {
                 o.material = clearMat;
                 o.material.blending = THREE.AdditiveBlending;
@@ -163,7 +155,6 @@ function main() {
 
   // RAYCAST
   function init() {
-    //projector = new THREE.Projector();
     canvas.addEventListener('mousedown', onDocumentMouseDown, false);
 
     function onDocumentMouseDown(event) {
@@ -178,13 +169,18 @@ function main() {
       mouse3D.normalize();
       var raycaster = new THREE.Raycaster(camera.position, mouse3D);
       var intersects = raycaster.intersectObjects(objects);
-      // Change color if hit block
+      // Change color if hit
       if (intersects.length > 0) {
         let setColor = Math.random() * 0xffffff;
         intersects[0].object.material.color.setHex(Math.random() * 0xffffff);
         intersects[0].object.material.color.setHex(setColor);
         console.log(intersects[0].object.name);
         console.log(setColor);
+        document.getElementById("partName").innerHTML = intersects[0].object.name.substring(intersects[0].object.name.indexOf("_") + 1);
+        console.log("setColor r",intersects[0].object.material.color.r);
+        console.log("setColor g",intersects[0].object.material.color.g);
+        console.log("setColor b",intersects[0].object.material.color.b);
+        document.getElementById("colBlock").style.backgroundColor = "rgb(" + intersects[0].object.material.color.r * 255 + "," + intersects[0].object.material.color.g * 255 + "," + intersects[0].object.material.color.b * 255 + ")";
       }
     }
 
@@ -208,10 +204,6 @@ function main() {
   window.addEventListener('resize', onWindowResize, false);
 
   function onWindowResize() {
-    /* camera.apsect = window.innerWidth / window.innerHeight;
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.updateProjectionMatrix(); */
-    /* resizeRendererToDisplaySize(renderer); */
   }
 }
 

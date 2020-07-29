@@ -18,3 +18,26 @@ code {
   height: 100vh;
   display: block;
 }
+
+#colBlock{
+  width:350px;
+  height: 100px;
+  margin: 50px;
+  background: red;
+  position: absolute;
+  border-radius: 20px;;
+}
+
+#partName{
+  color:#fff;
+  font-size: 35px;
+  font-weight: 500;
+  line-height: 25px;
+}
+
+@media only screen and (max-width: 600px){
+  .App{
+    display: flex;
+    justify-content: center;
+  }
+}
