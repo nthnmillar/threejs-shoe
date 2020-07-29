@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/threejs-shoe/static/css/main.763b7610.chunk.css",
-    "main.js": "/threejs-shoe/static/js/main.976eb939.chunk.js",
-    "main.js.map": "/threejs-shoe/static/js/main.976eb939.chunk.js.map",
+    "main.css": "/threejs-shoe/static/css/main.67d0c4e4.chunk.css",
+    "main.js": "/threejs-shoe/static/js/main.f6fa8bcd.chunk.js",
+    "main.js.map": "/threejs-shoe/static/js/main.f6fa8bcd.chunk.js.map",
     "runtime-main.js": "/threejs-shoe/static/js/runtime-main.c32d8384.js",
     "runtime-main.js.map": "/threejs-shoe/static/js/runtime-main.c32d8384.js.map",
     "static/js/2.83f7d94c.chunk.js": "/threejs-shoe/static/js/2.83f7d94c.chunk.js",
     "static/js/2.83f7d94c.chunk.js.map": "/threejs-shoe/static/js/2.83f7d94c.chunk.js.map",
     "index.html": "/threejs-shoe/index.html",
-    "precache-manifest.dc1c0fac142dd9d2b749887fc3562d8c.js": "/threejs-shoe/precache-manifest.dc1c0fac142dd9d2b749887fc3562d8c.js",
+    "precache-manifest.5b5a0d164cb1a8f5c570962f9139b9ea.js": "/threejs-shoe/precache-manifest.5b5a0d164cb1a8f5c570962f9139b9ea.js",
     "service-worker.js": "/threejs-shoe/service-worker.js",
-    "static/css/main.763b7610.chunk.css.map": "/threejs-shoe/static/css/main.763b7610.chunk.css.map",
+    "static/css/main.67d0c4e4.chunk.css.map": "/threejs-shoe/static/css/main.67d0c4e4.chunk.css.map",
     "static/js/2.83f7d94c.chunk.js.LICENSE.txt": "/threejs-shoe/static/js/2.83f7d94c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c32d8384.js",
     "static/js/2.83f7d94c.chunk.js",
-    "static/css/main.763b7610.chunk.css",
-    "static/js/main.976eb939.chunk.js"
+    "static/css/main.67d0c4e4.chunk.css",
+    "static/js/main.f6fa8bcd.chunk.js"
   ]
 }

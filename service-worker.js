@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/threejs-shoe/precache-manifest.dc1c0fac142dd9d2b749887fc3562d8c.js"
+  "/threejs-shoe/precache-manifest.5b5a0d164cb1a8f5c570962f9139b9ea.js"
 );
 
 self.addEventListener('message', (event) => {
