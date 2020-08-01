@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import store from "./store";
+import {colAction, nameAction} from './actions/actions';
+
 import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -9,7 +12,15 @@ import shoeModel from './models/Shoe2019.glb';
 const CanvasThree = () =>{
    // const [colour, setColour] = useState('grey');
    // const [partName, setPartName] = useState('Part');
-  
+
+   const colDispatched = (col) =>{
+    store.dispatch(colAction(col));
+  	}
+
+  const nameDispatched = (name) => {
+    store.dispatch(nameAction(name));
+  }
+    
     useEffect(() => {
       var scene = new THREE.Scene();
       function main() {
@@ -200,13 +211,15 @@ const CanvasThree = () =>{
               intersects[0].object.material.color.setHex(setColor);
               console.log(intersects[0].object.name);
               console.log(setColor);
+              colDispatched("rgb(" + intersects[0].object.material.color.r * 255 + "," + intersects[0].object.material.color.g * 255 + "," + intersects[0].object.material.color.b * 255 + ")");
      //         setColour("rgb(" + intersects[0].object.material.color.r * 255 + "," + intersects[0].object.material.color.g * 255 + "," + intersects[0].object.material.color.b * 255 + ")");
-              document.getElementById("partName").innerHTML = intersects[0].object.name.substring(intersects[0].object.name.indexOf("_") + 1);
+     //         document.getElementById("partName").innerHTML = intersects[0].object.name.substring(intersects[0].object.name.indexOf("_") + 1);
               console.log("setColor r",intersects[0].object.material.color.r);
               console.log("setColor g",intersects[0].object.material.color.g);
               console.log("setColor b",intersects[0].object.material.color.b);
+              nameDispatched(intersects[0].object.name.substring(intersects[0].object.name.indexOf("_") + 1));
      //         setPartName(intersects[0].object.name.substring(intersects[0].object.name.indexOf("_") + 1));
-              document.getElementById("colBlock").style.backgroundColor = "rgb(" + intersects[0].object.material.color.r * 255 + "," + intersects[0].object.material.color.g * 255 + "," + intersects[0].object.material.color.b * 255 + ")";
+     //         document.getElementById("colBlock").style.backgroundColor = "rgb(" + intersects[0].object.material.color.r * 255 + "," + intersects[0].object.material.color.g * 255 + "," + intersects[0].object.material.color.b * 255 + ")";
             }
           }
   
