@@ -1,64 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import store from "./store";
 import {colAction, nameAction} from './actions/actions';
 
 import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
-import lightMap from './models/light-map.png';
-import normMap from './models/normal-map.png';
+import lightMap from './models/light-map.jpg';
+import normMap from './models/normal-map.jpg';
 import shoeModel from './models/Shoe2019.glb';
 
 const CanvasThree = () =>{
-   // const [colour, setColour] = useState('grey');
-   // const [partName, setPartName] = useState('Part');
 
-   const colDispatched = (col) =>{
+  const colDispatched = (col) =>{
     store.dispatch(colAction(col));
-  	}
+  }
 
   const nameDispatched = (name) => {
     store.dispatch(nameAction(name));
   }
     
-    useEffect(() => {
-      var scene = new THREE.Scene();
-      function main() {
-        const canvas = document.querySelector('#c');
-        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-        canvas.width = canvas.clientWidth;
-        canvas.height = canvas.clientHeight;
+  useEffect(() => {
+    var scene = new THREE.Scene();
+    function main() {
+      const canvas = document.querySelector('#c');
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
   
-        var raycaster = new THREE.Raycaster();
-        var objects = [];
-        var model;
-        var cube;
-        var crate;
-        var scale = 0.05;
-        var mouse3D;
+      var objects = [];
+      var model;
+      var scale = 0.05;
+      var mouse3D;
   
-        // LOADING MANAGER
-        THREE.DefaultLoadingManager.onStart = function(url, itemsLoaded, itemsTotal) {
-          console.log(
-            'Started loading file: ' +
-              url +
-              '.\nLoaded ' +
-              itemsLoaded +
-              ' of ' +
-              itemsTotal +
-              ' files.'
-          );
-        };
-        THREE.DefaultLoadingManager.onLoad = function() {
-          console.log('Loading Complete!');
+      // LOADING MANAGER
+      THREE.DefaultLoadingManager.onStart = function(url, itemsLoaded, itemsTotal) {
+        console.log(
+          'Started loading file: ' +
+          url +
+          '.\nLoaded ' +
+          itemsLoaded +
+          ' of ' +
+          itemsTotal +
+          ' files.'
+        );
+      };
+      THREE.DefaultLoadingManager.onLoad = function() {
+        console.log('Loading Complete!');
           init();
         };
   
         // MATERIALS
-        var partMat = new THREE.MeshLambertMaterial({ color: 0x7a7a7a });
+        //var partMat = new THREE.MeshLambertMaterial({ color: 0x7a7a7a });
         var modelMat = new THREE.MeshPhongMaterial({ color: 0x393939 });
         var clearMat = new THREE.MeshPhongMaterial({ color: 0xffffff });
-        var airMat = new THREE.MeshPhongMaterial({ color: 0x170078 });
+       // var airMat = new THREE.MeshPhongMaterial({ color: 0x170078 });
         // CAMERA
         var camera = new THREE.PerspectiveCamera(
           75,
@@ -100,50 +95,55 @@ const CanvasThree = () =>{
               shoeModel,
               function(gltf) {
                 model = gltf.scene;
-  
                 model.scale.x = scale;
                 model.scale.z = scale;
                 model.scale.y = scale;
-  
                 model.position.set(0, -0.5, 0);
   
                 model.traverse(function(o) {
                   if (o.isMesh) {
-  
                     if (
-                      o.name == '001_laces' ||
-                      o.name == '005_swoosh' ||
-                      o.name == '100_midsolebrand'
+                      o.name === '001_laces' ||
+                      o.name === '005_swoosh' ||
+                      o.name === '100_midsolebrand'
                     ) {
                       o.material = modelMat;
                     }
   
-                    if (o.name == '012_sole') {
+                    if (o.name === '012_sole') {
                       o.material = new THREE.MeshPhongMaterial({ color: 0x393939 });
                     }
   
-                    if (o.name == '003_upper') {
+                    if (o.name === '003_upper') {
                       o.material = new THREE.MeshPhongMaterial({ color: 0x393939 });
                     }
   
-                    if (o.name == '006_airbags') {
+                    if (o.name === '006_airbags') {
+                      o.material = new THREE.MeshPhongMaterial({ color: 0x393939 });
+                      /*
                       o.material = airMat;
                       o.material.opacity = 0.8;
                       o.material.reflectivity = 3;
+                      */
                     }
   
                     o.material.lightMap = light;
                     o.material.normalMap = norm;
   
-                    if (o.name == '100_transparent') {
+                    if (o.name === '100_transparent') {
                       o.material = clearMat;
                       o.material.blending = THREE.AdditiveBlending;
                       o.material.opacity = 0.5;
                       o.material.transparent = true;
                       o.material.reflectivity = 3;
+                     // o.selectable = false;
+                      console.log(o);
                     }
-  
-                    objects.push(o);
+                    
+                    if (o.name !== '100_transparent'){
+                      objects.push(o);
+                    }
+                    
                   }
                 });
   
@@ -209,21 +209,11 @@ const CanvasThree = () =>{
               let setColor = Math.random() * 0xffffff;
               intersects[0].object.material.color.setHex(Math.random() * 0xffffff);
               intersects[0].object.material.color.setHex(setColor);
-              console.log(intersects[0].object.name);
-              console.log(setColor);
               colDispatched("rgb(" + intersects[0].object.material.color.r * 255 + "," + intersects[0].object.material.color.g * 255 + "," + intersects[0].object.material.color.b * 255 + ")");
-     //         setColour("rgb(" + intersects[0].object.material.color.r * 255 + "," + intersects[0].object.material.color.g * 255 + "," + intersects[0].object.material.color.b * 255 + ")");
-     //         document.getElementById("partName").innerHTML = intersects[0].object.name.substring(intersects[0].object.name.indexOf("_") + 1);
-              console.log("setColor r",intersects[0].object.material.color.r);
-              console.log("setColor g",intersects[0].object.material.color.g);
-              console.log("setColor b",intersects[0].object.material.color.b);
               nameDispatched(intersects[0].object.name.substring(intersects[0].object.name.indexOf("_") + 1));
-     //         setPartName(intersects[0].object.name.substring(intersects[0].object.name.indexOf("_") + 1));
-     //         document.getElementById("colBlock").style.backgroundColor = "rgb(" + intersects[0].object.material.color.r * 255 + "," + intersects[0].object.material.color.g * 255 + "," + intersects[0].object.material.color.b * 255 + ")";
             }
           }
-  
-  
+    
           // RENDER
           function render() {
             if (resizeRendererToDisplaySize(renderer)) {
@@ -235,14 +225,12 @@ const CanvasThree = () =>{
             controls.update();
             // Render the scene
             renderer.render(scene, camera);
-  
             requestAnimationFrame(render);
           }
           requestAnimationFrame(render);
         }
   
         window.addEventListener('resize', onWindowResize, false);
-  
         function onWindowResize() {
         }
       }
@@ -250,7 +238,6 @@ const CanvasThree = () =>{
       main();
     });
     
-  
     return (
       <>
         <canvas id= "c"></canvas>

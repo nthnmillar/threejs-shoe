@@ -1,8 +1,7 @@
 import React from 'react';
-import { Provider, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import {colAction, nameAction} from './actions/actions';
 
-// mapStatetoProps
 const mapStatetoProps = (state => {
     return {
       col:state.panCol.col,
@@ -10,7 +9,6 @@ const mapStatetoProps = (state => {
     };
   });
 
-// mapDispatchToProps
 const mapDispatchToProps = dispatch => ({
     displayCol: () => dispatch(colAction()),
     displayName: () => dispatch(nameAction()),
@@ -41,5 +39,5 @@ const DetailsPanel = () =>{
     )
 }
 
-  export default DetailsPanel;
+export default DetailsPanel;
   
