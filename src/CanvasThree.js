@@ -227,7 +227,7 @@ const CanvasThree = () =>{
               intersects[0].object.material.color.setHex(Math.random() * 0xffffff);
               intersects[0].object.material.color.setHex(setColor);
               colDispatched("rgb(" + intersects[0].object.material.color.r * 255 + "," + intersects[0].object.material.color.g * 255 + "," + intersects[0].object.material.color.b * 255 + ")");
-              nameDispatched(intersects[0].object.name.substring(intersects[0].object.name.indexOf("_") + 1));
+              nameDispatched(intersects[0].object.name.substring(intersects[0].object.name.indexOf("_") + 1).replace(/\-/g," "));
             }
           }
     
