@@ -49,11 +49,13 @@ const CanvasThree = () =>{
         console.log('Loading Complete!');
           init();
         };
-  
+               
         // MATERIALS
-        //var partMat = new THREE.MeshLambertMaterial({ color: 0x7a7a7a });
-        var modelMat = new THREE.MeshPhongMaterial({ color: 0x393939 });
-        var clearMat = new THREE.MeshPhongMaterial({ color: 0xffffff });
+        const baseColor = 0xafafaf;
+        var modelMat1 = new THREE.MeshPhongMaterial({ color: baseColor});
+        var modelMat2 = new THREE.MeshPhongMaterial({ color: baseColor });
+        var modelMat3 = new THREE.MeshPhongMaterial({ color: baseColor });
+        var clearMat = new THREE.MeshPhongMaterial({ color: baseColor });
        // var airMat = new THREE.MeshPhongMaterial({ color: 0x170078 });
         // CAMERA
         var camera = new THREE.PerspectiveCamera(
@@ -125,50 +127,40 @@ const CanvasThree = () =>{
                 model.scale.z = scale;
                 model.scale.y = scale;
                 model.position.set(0, -0.5, 0);
-  
+ 
                 model.traverse(function(o) {
                   if (o.isMesh) {
-                    if (
-                      o.name === '001_laces' ||
-                      o.name === '005_swoosh' ||
-                      o.name === '100_midsolebrand'
-                    ) {
-                      o.material = modelMat;
+
+                    if (o.name.match(/^0/)){
+                      o.material = new THREE.MeshPhongMaterial({ color: baseColor});
                     }
-  
-                    if (o.name === '012_sole') {
-                      o.material = new THREE.MeshPhongMaterial({ color: 0x393939 });
+                    if (o.name.match(/^1/)){
+                      o.material =  modelMat1;
                     }
-  
-                    if (o.name === '003_upper') {
-                      o.material = new THREE.MeshPhongMaterial({ color: 0x393939 });
+                    if (o.name.match(/^2/)){
+                      o.material = modelMat2;
                     }
-  
-                    if (o.name === '006_airbags') {
-                      o.material = new THREE.MeshPhongMaterial({ color: 0x393939 });
-                   
-                    //  o.material = airMat;
-                      o.material.opacity = 0.8;
-                      o.material.reflectivity = 3;
-                   
+                    if (o.name.match(/^3/)){
+                      o.material = modelMat3;
                     }
-  
+                    if (o.name.match(/^9/)){
+                      o.material = new THREE.MeshPhongMaterial({ color: baseColor });
+                    }
                     o.material.lightMap = light;
                     o.material.normalMap = norm;
-  
-                    if (o.name === '100_transparent') {
+                    if (o.name.match(/^8/)){
                       o.material = clearMat;
                       o.material.blending = THREE.AdditiveBlending;
                       o.material.opacity = 0.5;
                       o.material.transparent = true;
                       o.material.reflectivity = 3;
                       console.log(o);
-                    }
-                    
-                    if (o.name !== '100_transparent'){
-                      objects.push(o);
-                    }
-                    
+                    } 
+                    if (o.name.match(/^(?!9)/)){
+                      if (o.name.match(/^(?!8)/)){
+                        objects.push(o);
+                      }                  
+                    }                  
                   }
                 });
   
