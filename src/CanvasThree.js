@@ -24,6 +24,7 @@ const CanvasThree = () =>{
     function main() {
       const canvas = document.querySelector('#c');
       const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+      //scene.background = new THREE.Color('blue');
       canvas.width = canvas.clientWidth;
       canvas.height = canvas.clientHeight;
   
@@ -72,19 +73,44 @@ const CanvasThree = () =>{
         var controls = new OrbitControls(camera, renderer.domElement);
         controls.update();
   
-        /*
+       
         // LIGHTS
-        const color = 0xFFFFFF;
-        const intensity = 1;
-        const light = new THREE.DirectionalLight(color, intensity);
-        light.position.set(-1, 2, 4);
-        light.castShadow = true;
-        scene.add(light);
-  
-        var ambLight = new THREE.AmbientLight(0xffffff, 0.25);
-        ambLight.position.y = 5;
-        scene.add(ambLight);
+        const hemiLight = new THREE.HemisphereLight(0xffffef, 0x200029,.1 )
+        scene.add(hemiLight);
+        
+        /*
+        let topLight = new THREE.DirectionalLight(0xFFFFFF, .1);
+        topLight.position.set(0, 200, 0);
+        const topLightHelper = new THREE.DirectionalLightHelper(topLight);  
+        scene.add(topLightHelper);
+        scene.add(topLight);
+        topLightHelper.update();
+        topLight.castShadow = true;
         */
+        
+        let rightLight = new THREE.DirectionalLight(0xFFFFFF, .8);
+        rightLight.position.set(200, 0,0 );
+     //   const rightLightHelper = new THREE.DirectionalLightHelper(rightLight);  
+     //   camera.add(rightLightHelper);
+        camera.add(rightLight);
+        scene.add(camera);
+    //    rightLightHelper.update();
+        rightLight.castShadow = true;
+
+        let leftLight = new THREE.DirectionalLight(0xFFFFFF, .8);
+        leftLight.position.set(-200, 0,0 );
+      //  const leftLightHelper = new THREE.DirectionalLightHelper(leftLight);  
+     //   camera.add(leftLightHelper);
+        camera.add(leftLight);
+        scene.add(camera);
+     //   leftLightHelper.update();
+        leftLight.castShadow = true;
+        
+        /*
+        let ambLight = new THREE.AmbientLight(0xffffff, 0.25);
+        ambLight.position.y = .1;
+        scene.add(ambLight);
+        */      
   
         // MODEL LOAD
         var texLoad = new THREE.TextureLoader();
@@ -120,11 +146,11 @@ const CanvasThree = () =>{
   
                     if (o.name === '006_airbags') {
                       o.material = new THREE.MeshPhongMaterial({ color: 0x393939 });
-                      /*
-                      o.material = airMat;
+                   
+                    //  o.material = airMat;
                       o.material.opacity = 0.8;
                       o.material.reflectivity = 3;
-                      */
+                   
                     }
   
                     o.material.lightMap = light;
@@ -136,7 +162,6 @@ const CanvasThree = () =>{
                       o.material.opacity = 0.5;
                       o.material.transparent = true;
                       o.material.reflectivity = 3;
-                     // o.selectable = false;
                       console.log(o);
                     }
                     
